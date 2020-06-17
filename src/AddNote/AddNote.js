@@ -15,10 +15,9 @@ export default class AddNote extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const newNote = {
-      name: e.target['note-name'].value,
+      note_name: e.target['note-name'].value,
       content: e.target['note-content'].value,
-      folderId: e.target['note-folder-id'].value,
-      modified: new Date(),
+      folderid: e.target['note-folder-id'].value,
     }
     fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
@@ -34,7 +33,7 @@ export default class AddNote extends Component {
       })
       .then(note => {
         this.context.addNote(note)
-        this.props.history.push(`/folder/${note.folderId}`)
+        this.props.history.push(`/folder/${note.folderid}`)
       })
       .catch(error => {
         console.error({ error })
@@ -67,7 +66,7 @@ export default class AddNote extends Component {
               <option value={null}>...</option>
               {folders.map(folder =>
                 <option key={folder.id} value={folder.id}>
-                  {folder.name}
+                  {folder.folder_name}
                 </option>
               )}
             </select>
