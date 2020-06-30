@@ -22,11 +22,11 @@ export default class Note extends React.Component {
         'content-type': 'application/json'
       },
     })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
-      })
+      .then(res => 
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          :  0
+      )
       .then(() => {
         this.context.deleteNote(noteId)
         // allow parent to perform extra behaviour
